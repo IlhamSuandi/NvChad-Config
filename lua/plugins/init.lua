@@ -40,6 +40,12 @@ return {
     opts = require "configs.todo_comments",
   },
 
+  {
+    "ThePrimeagen/harpoon",
+    config = function()
+      require "configs.harpoon"
+    end,
+  },
   -- These are some examples, uncomment them if you want to see them work!
   -- {
   --   "neovim/nvim-lspconfig",
