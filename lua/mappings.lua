@@ -1,6 +1,4 @@
 require "nvchad.mappings"
-
--- add yours here
 local map = vim.keymap.set
 
 map("i", "jj", "<ESC>")
@@ -35,12 +33,8 @@ map("n", "<leader>j", "<Plug>(easymotion-j)", { noremap = true, silent = true })
 map("n", "<leader>s", "<Plug>(easymotion-overwin-f)", { noremap = true, silent = true })
 map("n", "s", "<Plug>(easymotion-s2)", { noremap = true, silent = true })
 map("n", "t", "<Plug>(easymotion-t2)", { noremap = true, silent = true })
-map("n", "/", "<Plug>(easymotion-sn)", {})
-map("o", "/", "<Plug>(easymotion-tn)", {})
 map("n", "<Leader>n", "<Plug>(easymotion-next)", {})
 map("n", "<Leader>N", "<Plug>(easymotion-prev)", {})
-map("n", "<Leader>f", "<Plug>(easymotion-bd-f)", {})
-map("n", "<Leader>f", "<Plug>(easymotion-overwin-f)", { noremap = true })
 
 -- NOTE : Harpoon
 local mark = require "harpoon.mark"

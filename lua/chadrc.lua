@@ -5,13 +5,14 @@
 local M = {}
 
 M.ui = {
-  theme = "nightfox",
+  theme = "catppuccin",
 
-  -- hl_override = {
-  -- 	Comment = { italic = true },
-  -- 	["@comment"] = { italic = true },
-  -- },
-  --
+  hl_override = {
+    Comment = { fg = "#a1a1a1", italic = true },  -- Replace '#a1a1a1' with your desired color
+    ["@comment"] = { fg = "#a1a1a1", italic = true },  -- Treesitter comment highlight group
+  },
+
+  transparency = true,
 
   statusline = {
     theme = "default", -- default/vscode/vscode_colored/minimal
