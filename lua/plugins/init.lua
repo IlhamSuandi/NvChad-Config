@@ -16,8 +16,8 @@ return {
     lazy = false,
   },
 
-  -- NOTE : VIM Easy Motion
   {
+  -- NOTE : VIM Easy Motion
     "easymotion/vim-easymotion",
     lazy = false,
     config = function()
@@ -46,6 +46,12 @@ return {
       require "configs.harpoon"
     end,
   },
+
+  {
+    -- TODO : add configuration
+    "mg979/vim-visual-multi",
+  },
+
   -- These are some examples, uncomment them if you want to see them work!
   -- {
   --   "neovim/nvim-lspconfig",

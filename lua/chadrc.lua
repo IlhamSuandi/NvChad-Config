@@ -5,7 +5,7 @@
 local M = {}
 
 M.ui = {
-  theme = "catppuccin",
+  theme = "tokyodark",
 
   hl_override = {
     Comment = { fg = "#a1a1a1", italic = true },  -- Replace '#a1a1a1' with your desired color
