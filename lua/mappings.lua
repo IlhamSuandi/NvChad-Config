@@ -13,12 +13,12 @@ map("v", "<C-_>", "gc", { noremap = true, silent = true })
 map("n", "<C-_>", "gcc", { noremap = true, silent = true })
 
 -- NOTE : move line up / down
-map("n", "<a-j>", ":m+<cr>", { noremap = true, nowait = true })
-map("i", "<a-j>", "<esc>:m+<cr>gi", { noremap = true, nowait = true })
-map("i", "<a-k>", "<esc>:m-2<cr>gi", { noremap = true, nowait = true })
-map("v", "<a-k>", ":m-2<cr>gvgv", { noremap = true, nowait = true })
-map("n", "<a-k>", ":m-2<cr>", { noremap = true, nowait = true })
-map("v", "<a-j>", ":m'>+<CR>gvgv", { noremap = true, nowait = true })
+map("n", "<a-j>", ":m+<cr>", { noremap = true })
+map("i", "<a-j>", "<esc>:m+<cr>gi", { noremap = true })
+map("i", "<a-k>", "<esc>:m-2<cr>gi", { noremap = true })
+map("v", "<a-k>", ":m-2<cr>gvgv", { noremap = true })
+map("n", "<a-k>", ":m-2<cr>", { noremap = true })
+map("v", "<a-j>", ":m'>+<CR>gvgv", { noremap = true })
 
 map("n", "<a-J>", "yyp")
 map("n", "<a-K>", "yyP")
