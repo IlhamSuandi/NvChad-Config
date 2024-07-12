@@ -143,5 +143,8 @@ end, { desc = "session persistence stop " })
 -- NOTE :  close all buffers
 map("n", "<leader>cb", "<cmd>%bd|e#<cr>", { desc = "buffer close all buffers", silent = true, noremap = true })
 
--- global lsp mappings
+-- NOTE : global lsp mappings
 map("n", "ge", vim.diagnostic.goto_next, { desc = "goto next diagnostic" })
+
+-- NOTE : noice mappings
+map("n", "<leader>nd", "<cmd>NoiceDismiss<CR>", { desc = "noice dismiss notification" })

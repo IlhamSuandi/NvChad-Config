@@ -38,6 +38,7 @@ return {
         "hrsh7th/cmp-nvim-lsp",
         "hrsh7th/cmp-buffer",
         "hrsh7th/cmp-path",
+        "hrsh7th/cmp-cmdline",
       },
     },
     opts = function()
@@ -130,6 +131,19 @@ return {
     event = "VeryLazy",
     config = function()
       require "configs.supermaven"
+    end,
+  },
+
+  {
+    -- NOTE : Noice Notification
+    "folke/noice.nvim",
+    event = "VeryLazy",
+    dependencies = {
+      "MunifTanjim/nui.nvim",
+      "rcarriga/nvim-notify",
+    },
+    config = function()
+      require "configs.noice"
     end,
   },
 }
