@@ -69,8 +69,8 @@ local options = {
   formatting = formatting_style,
 
   mapping = {
-    ["<C-p>"] = cmp.mapping.select_prev_item(),
-    ["<C-n>"] = cmp.mapping.select_next_item(),
+    ["<C-p>"] = cmp.mapping.select_prev_item { behavior = cmp.SelectBehavior.Select },
+    ["<C-n>"] = cmp.mapping.select_next_item { behavior = cmp.SelectBehavior.Select },
     ["<C-d>"] = cmp.mapping.scroll_docs(-4),
     ["<C-f>"] = cmp.mapping.scroll_docs(4),
     ["<C-Space>"] = cmp.mapping.complete(),
@@ -123,7 +123,20 @@ cmp.setup.cmdline("/", {
 })
 
 cmp.setup.cmdline(":", {
-  mapping = cmp.mapping.preset.cmdline(),
+  mapping = cmp.mapping.preset.cmdline {
+    ["<CR>"] = cmp.mapping.confirm { behavior = cmp.ConfirmBehavior.Insert, select = true },
+    ["<Tab>"] = cmp.mapping {
+      i = function(fallback)
+        if cmp.visible() and cmp.get_active_entry() then
+          cmp.confirm { behavior = cmp.ConfirmBehavior.Replace, select = false }
+        else
+          fallback()
+        end
+      end,
+      s = cmp.mapping.confirm { select = true },
+      c = cmp.mapping.confirm { behavior = cmp.ConfirmBehavior.Replace, select = true },
+    },
+  },
   sources = cmp.config.sources({
     { name = "path" },
   }, {
@@ -135,5 +148,13 @@ cmp.setup.cmdline(":", {
     },
   }),
 })
+
+-- Setup lspconfig.
+local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
+local lspconfig = require "lspconfig"
+
+lspconfig.pyright.setup {
+  capabilities = capabilities,
+}
 
 return options
