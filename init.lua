@@ -48,8 +48,6 @@ vim.api.nvim_create_autocmd("VimEnter", {
   end,
 })
 
-vim.wo.relativenumber = true
-
 vim.api.nvim_create_autocmd("TextYankPost", {
   group = vim.api.nvim_create_augroup("highlight_yank", {}),
   desc = "Hightlight selection on yank",

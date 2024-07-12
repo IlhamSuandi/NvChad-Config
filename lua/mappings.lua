@@ -1,49 +1,62 @@
 require "nvchad.mappings"
+
 local map = vim.keymap.set
 
+-- NOTE : custom mappings
 map("i", "jj", "<ESC>")
 map("n", "<C-h>", ":TmuxNavigateLeft<CR>")
 map("n", "<C-l>", ":TmuxNavigateRight<CR>")
 map("n", "<C-j>", ":TmuxNavigateDown<CR>")
 map("n", "<C-k>", ":TmuxNavigateUp<CR>")
-map("n", "yie", "ggVGy", { desc = "yank everything" })
-map("n", "cie", "ggVGc", { desc = "change everything" })
-map("n", "die", "ggVGd", { desc = "delete everything" })
+map("n", "vie", "ggVG", { desc = "everything visual everything" })
+map("n", "yie", "ggVGy", { desc = "everything yank everything" })
+map("n", "cie", "ggVGc", { desc = "everything change everything" })
+map("n", "die", "ggVGd", { desc = "everything delete everything" })
 map("v", "<C-_>", "gc", { noremap = true, silent = true })
 map("n", "<C-_>", "gcc", { noremap = true, silent = true })
 
--- NOTE : move line up / down
-map("n", "<a-j>", ":m+<cr>", { noremap = true })
-map("i", "<a-j>", "<esc>:m+<cr>gi", { noremap = true })
-map("i", "<a-k>", "<esc>:m-2<cr>gi", { noremap = true })
-map("v", "<a-k>", ":m-2<cr>gvgv", { noremap = true })
-map("n", "<a-k>", ":m-2<cr>", { noremap = true })
-map("v", "<a-j>", ":m'>+<CR>gvgv", { noremap = true })
-
-map("n", "<a-J>", "yyp")
-map("n", "<a-K>", "yyP")
-map("v", "<a-J>", "y`>p`<")
-map("v", "<a-K>", "y`<P`>")
+-- -- NOTE : move line up / down
+-- map("n", "<a-j>", ":m+<cr>", { noremap = true })
+-- map("i", "<a-j>", "<esc>:m+<cr>gi", { noremap = true })
+-- map("i", "<a-k>", "<esc>:m-2<cr>gi", { noremap = true })
+-- map("v", "<a-k>", ":m-2<cr>gvgv", { noremap = true })
+-- map("n", "<a-k>", ":m-2<cr>", { noremap = true })
+-- map("v", "<a-j>", ":m'>+<CR>gvgv", { noremap = true })
+-- map("n", "<a-J>", "yyp")
+-- map("n", "<a-K>", "yyP")
+-- map("v", "<a-J>", "y`>p`<")
+-- map("v", "<a-K>", "y`<P`>")
 
 -- NOTE : toggle boolean
 map(
   "n",
   "<leader>tb",
   ':lua require("configs.toggle_boolean").toggle_boolean()<CR>',
-  { desc = "toggle boolean", noremap = true, silent = true }
+  { desc = "boolean toggle", noremap = true, silent = true }
 )
 
 -- NOTE : EasyMotion
-map("n", "<leader>w", "<Plug>(easymotion-w)", { noremap = true, silent = true })
-map("n", "<leader>s", "<Plug>(easymotion-overwin-f)", { noremap = true, silent = true })
-map("n", "<leader>e", "<Plug>(easymotion-e)", { noremap = true, silent = true })
-map("n", "<leader>b", "<Plug>(easymotion-b)", { noremap = true, silent = true })
-map("n", "<leader>j", "<Plug>(easymotion-j)", { noremap = true, silent = true })
-map("n", "<leader>s", "<Plug>(easymotion-overwin-f)", { noremap = true, silent = true })
-map("n", "s", "<Plug>(easymotion-s2)", { noremap = true, silent = true })
-map("n", "t", "<Plug>(easymotion-t2)", { noremap = true, silent = true })
-map("n", "<Leader>n", "<Plug>(easymotion-next)", {})
-map("n", "<Leader>N", "<Plug>(easymotion-prev)", {})
+map(
+  "n",
+  "<leader>s",
+  "<Plug>(easymotion-s2)",
+  { noremap = true, silent = true, desc = "easymotion search with 1 word from entire file" }
+)
+
+map(
+  "n",
+  "<leader>w",
+  "<Plug>(easymotion-w)",
+  { noremap = true, silent = true, desc = "easymotion search by the first of the word" }
+)
+map("n", "<leader>k", "<Plug>(easymotion-b)", { noremap = true, silent = true, desc = "easymotion search above" })
+map("n", "<leader>j", "<Plug>(easymotion-j)", { noremap = true, silent = true, desc = "easymotion search below" })
+map("n", "<Leader>n", "<Plug>(easymotion-next)", { desc = "easymotion find next" })
+map("n", "<Leader>N", "<Plug>(easymotion-prev)", { desc = "easymotion find prev" })
+
+-- NOTE : Sneak
+map("n", "s", "<Plug>Sneak_s", { noremap = true, silent = true, desc = "sneak search 2 words in front of cursor" })
+map("n", "S", "<Plug>Sneak_S", { noremap = true, silent = true, desc = "sneak search 2 words in front of cursor" })
 
 -- NOTE : Harpoon
 local mark = require "harpoon.mark"
@@ -57,6 +70,7 @@ map("n", "<A-p>", function()
   ui.nav_prev()
 end, { desc = "harpoon prev file", silent = true })
 map("n", "<C-e>", ":lua require('harpoon.ui').toggle_quick_menu()<CR>", { desc = "harpoon quick file", silent = true })
+
 map(
   "n",
   "<leader>1",
@@ -111,9 +125,23 @@ map(
   ":lua require('harpoon.ui').nav_file(9)<CR>",
   { desc = "harpoon navigate to 9", silent = true, noremap = true }
 )
-map(
-  "n",
-  "<leader>10",
-  ":lua require('harpoon.ui').nav_file(10)<CR>",
-  { desc = "harpoon navigate to 10", silent = true, noremap = true }
-)
+
+-- NOTE : Persistence
+map("n", "<leader>qs", function()
+  require("persistence").select()
+end, { desc = "session select session to load" })
+map("n", "<leader>ql", function()
+  require("persistence").load()
+end, { desc = "session load session from directory" })
+map("n", "<leader>qL", function()
+  require("persistence").load { last = true }
+end, { desc = "session load from last session" })
+map("n", "<leader>qd", function()
+  require("persistence").stop()
+end, { desc = "session persistence stop " })
+
+-- NOTE :  close all buffers
+map("n", "<leader>cb", "<cmd>%bd|e#<cr>", { desc = "buffer close all buffers", silent = true, noremap = true })
+
+-- global lsp mappings
+map("n", "ge", vim.diagnostic.goto_next, { desc = "goto next diagnostic" })
