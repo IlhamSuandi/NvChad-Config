@@ -58,18 +58,18 @@ return {
   },
 
   {
-    -- NOTE : Tmux Navigator
+    -- NOTE : Tmux-Navigator
     "christoomey/vim-tmux-navigator",
     event = "VeryLazy",
   },
 
   {
-    -- NOTE : VIM Surround
+    -- NOTE : VIM-Surround
     "tpope/vim-surround",
     event = "VeryLazy",
   },
   {
-    -- NOTE : VIM Easy Motion
+    -- NOTE : VIM-Easy-Motion
     "easymotion/vim-easymotion",
     event = "VeryLazy",
     config = function()
@@ -87,7 +87,7 @@ return {
   },
 
   {
-    -- NOTE : Todo Comments
+    -- NOTE : Todo-Comments
     "folke/todo-comments.nvim",
     event = "VeryLazy",
     dependencies = { "nvim-lua/plenary.nvim" },
@@ -103,30 +103,28 @@ return {
   },
 
   {
-    -- NOTE : Visual Multi
+    -- NOTE : Visual-Multi
     "mg979/vim-visual-multi",
     lazy = false,
   },
 
   {
-    -- NOTE : Auto Session
     "folke/persistence.nvim",
+    -- NOTE : Auto Session Persistence
     event = "BufReadPre",
-    config = {
-      dir = vim.fn.stdpath "state" .. "/sessions/",
-      need = 1,
-      branch = true,
-    },
+    config = function()
+      require "configs.custom_persistence"
+    end,
   },
 
   {
-    -- NOTE : Vim Sneak
+    -- NOTE : Vim-Sneak
     "justinmk/vim-sneak",
     lazy = false,
   },
 
   {
-    -- NOTE : Super Maven Auto Suggest
+    -- NOTE : Super_Maven Auto Suggest
     "supermaven-inc/supermaven-nvim",
     event = "VeryLazy",
     config = function()
@@ -148,11 +146,14 @@ return {
   },
 
   {
+    -- NOTE : Neorg Note-taking Plugin
     "nvim-neorg/neorg",
     lazy = false, -- Disable lazy loading as some `lazy.nvim` distributions set `lazy = true` by default
-    version = "*", -- Pin Neorg to the latest stable release
+    version = "*", -- Pin Neorg to the lalazy stable release
     config = function()
       require "configs.neorg"
     end,
   },
 }
+
+

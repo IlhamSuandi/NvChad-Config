@@ -124,19 +124,25 @@ cmp.setup.cmdline("/", {
 
 cmp.setup.cmdline(":", {
   mapping = cmp.mapping.preset.cmdline {
-    ["<CR>"] = cmp.mapping.confirm { behavior = cmp.ConfirmBehavior.Insert, select = true },
-    ["<Tab>"] = cmp.mapping {
-      i = function(fallback)
-        if cmp.visible() and cmp.get_active_entry() then
-          cmp.confirm { behavior = cmp.ConfirmBehavior.Replace, select = false }
-        else
-          fallback()
+    ["<Tab>"] = cmp.mapping(function(fallback)
+      -- This little snippet will confirm with tab, and if no entry is selected, will confirm the first item
+      if cmp.visible() then
+        local entry = cmp.get_selected_entry()
+        if not entry then
+          cmp.select_next_item { behavior = cmp.SelectBehavior.Select }
         end
-      end,
-      s = cmp.mapping.confirm { select = true },
-      c = cmp.mapping.confirm { behavior = cmp.ConfirmBehavior.Replace, select = true },
+        cmp.confirm()
+      else
+        fallback()
+      end
+    end, { "i", "s", "c" }),
+
+    ["<CR>"] = cmp.mapping.confirm {
+      behavior = cmp.ConfirmBehavior.Insert,
+      select = true,
     },
   },
+
   sources = cmp.config.sources({
     { name = "path" },
   }, {

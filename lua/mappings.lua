@@ -15,17 +15,17 @@ map("n", "die", "ggVGd", { desc = "everything delete everything" })
 map("v", "<C-_>", "gc", { noremap = true, silent = true })
 map("n", "<C-_>", "gcc", { noremap = true, silent = true })
 
--- -- NOTE : move line up / down
--- map("n", "<a-j>", ":m+<cr>", { noremap = true })
--- map("i", "<a-j>", "<esc>:m+<cr>gi", { noremap = true })
--- map("i", "<a-k>", "<esc>:m-2<cr>gi", { noremap = true })
--- map("v", "<a-k>", ":m-2<cr>gvgv", { noremap = true })
--- map("n", "<a-k>", ":m-2<cr>", { noremap = true })
--- map("v", "<a-j>", ":m'>+<CR>gvgv", { noremap = true })
--- map("n", "<a-J>", "yyp")
--- map("n", "<a-K>", "yyP")
--- map("v", "<a-J>", "y`>p`<")
--- map("v", "<a-K>", "y`<P`>")
+-- NOTE : move line up / down
+map("n", "<a-j>", ":m+<cr>", { noremap = true })
+map("i", "<a-j>", "<esc>:m+<cr>gi", { noremap = true })
+map("i", "<a-k>", "<esc>:m-2<cr>gi", { noremap = true })
+map("v", "<a-k>", ":m-2<cr>gvgv", { noremap = true })
+map("n", "<a-k>", ":m-2<cr>", { noremap = true })
+map("v", "<a-j>", ":m'>+<CR>gvgv", { noremap = true })
+map("n", "<a-J>", "yyp")
+map("n", "<a-K>", "yyP")
+map("v", "<a-J>", "y`>p`<")
+map("v", "<a-K>", "y`<P`>")
 
 -- NOTE : toggle boolean
 map(
@@ -136,7 +136,8 @@ end, { desc = "session load session from directory" })
 map("n", "<leader>qL", function()
   require("persistence").load { last = true }
 end, { desc = "session load from last session" })
-map("n", "<leader>qd", function()
+map("n", "<leader>qd", "<cmd>DeleteSession<CR>", { desc = "session select and delete session" })
+map("n", "<leader>qD", function()
   require("persistence").stop()
 end, { desc = "session persistence stop " })
 
