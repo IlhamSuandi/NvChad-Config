@@ -148,12 +148,46 @@ return {
   {
     -- NOTE : Neorg Note-taking Plugin
     "nvim-neorg/neorg",
-    lazy = false, -- Disable lazy loading as some `lazy.nvim` distributions set `lazy = true` by default
-    version = "*", -- Pin Neorg to the lalazy stable release
+    lazy = false,
+    version = "*",
     config = function()
       require "configs.neorg"
     end,
   },
+
+  {
+    -- NOTE : Flutter-Tools Plugin for debugging flutter apps
+    "akinsho/flutter-tools.nvim",
+    lazy = false,
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "stevearc/dressing.nvim", -- optional for vim.ui.select
+    },
+    config = function()
+      require "configs.flutter_tools"
+    end,
+  },
+
+  {
+    -- NOTE : debugging tools
+    "mfussenegger/nvim-dap",
+    dependencies = {
+      "rcarriga/nvim-dap-ui",
+      -- "theHamsta/nvim-dap-virtual-text",
+      -- "jbyuki/one-small-step-for-vimkind",
+      -- "nvim-telescope/telescope-dap.nvim",
+    },
+    event = "VeryLazy",
+    config = function()
+      require "configs.nvim_dap"
+    end,
+  },
+
+  {
+    -- NOTE : colorizer
+    "norcalli/nvim-colorizer.lua",
+    config = function()
+      require("colorizer").setup()
+    end,
+  },
 }
-
-

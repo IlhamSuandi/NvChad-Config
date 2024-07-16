@@ -17,11 +17,11 @@ require("neorg").setup {
         engine = "nvim-cmp",
       },
     },
-    ["core.journal"] = {
-      config = {
-        journal_folder = "~/neorg/journal",
-        default_template = "~/neorg/templates/journal.norg",
-      },
-    },
+    -- ["core.journal"] = {
+    --   config = {
+    --     journal_folder = "~/neorg/journal",
+    --     default_template = "~/neorg/templates/journal.norg",
+    --   },
+    -- },
   },
 }

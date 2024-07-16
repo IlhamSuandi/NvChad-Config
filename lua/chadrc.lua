@@ -5,7 +5,7 @@
 local M = {}
 
 M.ui = {
-  theme = "tokyodark",
+  theme = "catppuccin",
 
   hl_override = {
     Visual = { bg = "grey_fg2" },
