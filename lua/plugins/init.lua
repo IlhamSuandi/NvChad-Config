@@ -63,7 +63,7 @@ return {
     -- NOTE : override treesitter
     "nvim-treesitter/nvim-treesitter",
     opts = {
-      ensure_installed = { "html", "css", "bash" },
+      ensure_installed = { "html", "css", "bash", "lua", "vim", "vimdoc" },
     },
   },
 
@@ -126,9 +126,10 @@ return {
   },
 
   {
-  -- NOTE : lsp stuff
+    -- NOTE : lsp stuff
     "williamboman/mason.nvim",
     cmd = { "Mason", "MasonInstall", "MasonInstallAll", "MasonUpdate" },
+    lazy = false,
     opts = function()
       return require "nvchad.configs.mason"
     end,
@@ -148,5 +149,5 @@ return {
       require("nvchad.configs.lspconfig").defaults()
       require "configs.lspconfig"
     end,
-  },
+ },
 }
