@@ -1,11 +1,19 @@
 local configs = require "nvchad.configs.lspconfig"
 
-local lspconfig = require "lspconfig"
 local servers = {
-  html={},
-  cssls={},
-  tsserver={},
-  dartls={},
+  html = {},
+  cssls = {},
+  tsserver = {
+    filetypes = {
+      "javascript",
+      "javascriptreact",
+      "javascript.jsx",
+      "typescript",
+      "typescriptreact",
+      "typescript.tsx",
+    },
+  },
+  dartls = {},
   pyright = {
     settings = {
       python = {
