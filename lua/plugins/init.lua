@@ -124,4 +124,29 @@ return {
       hooks.register(hooks.type.SCOPE_HIGHLIGHT, hooks.builtin.scope_highlight_from_extmark)
     end,
   },
+
+  {
+  -- NOTE : lsp stuff
+    "williamboman/mason.nvim",
+    cmd = { "Mason", "MasonInstall", "MasonInstallAll", "MasonUpdate" },
+    opts = function()
+      return require "nvchad.configs.mason"
+    end,
+    config = function(_, opts)
+      require("mason").setup(opts)
+
+      vim.api.nvim_create_user_command("MasonInstallAll", function()
+        require("nvchad.mason").install_all(opts.ensure_installed)
+      end, {})
+    end,
+  },
+
+  {
+    "neovim/nvim-lspconfig",
+    event = "User FilePost",
+    config = function()
+      require("nvchad.configs.lspconfig").defaults()
+      require "configs.lspconfig"
+    end,
+  },
 }
