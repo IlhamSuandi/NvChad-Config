@@ -29,10 +29,11 @@ require("noice").setup {
         skip = true,
       },
     },
-    {
-      view = "notify",
-      filter = { event = "msg_showmode", find = "recording" },
-    },
+
+    -- {
+    --   view = "notify",
+    --   filter = { event = "msg_showmode", find = "recording" },
+    -- },
   },
 }
 
