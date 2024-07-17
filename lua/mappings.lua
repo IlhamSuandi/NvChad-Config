@@ -161,7 +161,7 @@ map("v", "<a-K>", "y`<P`>")
 map(
   "n",
   "<leader>tb",
-  ':lua require("configs.toggle_boolean").toggle_boolean()<CR>',
+  ':lua require("configs.customs.toggle_boolean").toggle_boolean()<CR>',
   { desc = "boolean toggle", noremap = true, silent = true }
 )
 
@@ -279,3 +279,6 @@ map("n", "ge", vim.diagnostic.goto_next, { desc = "goto next diagnostic" })
 
 -- NOTE : noice mappings
 map("n", "<leader>nd", "<cmd>NoiceDismiss<CR>", { desc = "noice dismiss notification" })
+
+-- NOTE : lazygit mappings
+map("n", "<leader>lg", "<cmd>LazyGit<cr>", { desc = "lazygit open" })

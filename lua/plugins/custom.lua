@@ -16,7 +16,7 @@ return {
     "easymotion/vim-easymotion",
     event = "VeryLazy",
     config = function()
-      require "configs.easy_motion"
+      require "configs.customs.easy_motion"
     end,
   },
 
@@ -25,7 +25,7 @@ return {
     "chentoast/marks.nvim",
     event = "VeryLazy",
     config = function()
-      require "configs.marks"
+      require "configs.customs.marks"
     end,
   },
 
@@ -34,14 +34,14 @@ return {
     "folke/todo-comments.nvim",
     event = "VeryLazy",
     dependencies = { "nvim-lua/plenary.nvim" },
-    opts = require "configs.todo_comments",
+    opts = require "configs.customs.todo_comments",
   },
 
   {
     -- NOTE : Harpoon
     "ThePrimeagen/harpoon",
     config = function()
-      require "configs.harpoon"
+      require "configs.customs.harpoon"
     end,
   },
 
@@ -50,7 +50,7 @@ return {
     "folke/persistence.nvim",
     event = "BufReadPre",
     config = function()
-      require "configs.custom_persistence"
+      require "configs.customs.persistence"
     end,
   },
 
@@ -66,7 +66,7 @@ return {
     commit = "2d9f42e0dcf57a06dce5bf8b23db427ae3b7799f",
     event = "VeryLazy",
     config = function()
-      require "configs.supermaven"
+      require "configs.customs.supermaven"
     end,
   },
 
@@ -79,7 +79,7 @@ return {
       "rcarriga/nvim-notify",
     },
     config = function()
-      require "configs.noice"
+      require "configs.customs.noice"
     end,
   },
 
@@ -89,7 +89,7 @@ return {
     lazy = false,
     version = "*",
     config = function()
-      require "configs.neorg"
+      require "configs.customs.neorg"
     end,
   },
 
@@ -99,10 +99,10 @@ return {
     lazy = false,
     dependencies = {
       "nvim-lua/plenary.nvim",
-      "stevearc/dressing.nvim", -- optional for vim.ui.select
+      "stevearc/dressing.nvim",
     },
     config = function()
-      require "configs.flutter_tools"
+      require "configs.customs.flutter_tools"
     end,
   },
 
@@ -117,7 +117,7 @@ return {
     },
     event = "VeryLazy",
     config = function()
-      require "configs.nvim_dap"
+      require "configs.customs.nvim_dap"
     end,
   },
 
@@ -145,46 +145,7 @@ return {
       "nvim-lua/plenary.nvim",
     },
     config = function()
-      vim.g.lazygit_floating_window_scaling_factor = 0.5 -- scaling factor for floating window
-      vim.g.lazygit_floating_window_use_plenary = 1 -- use plenary.nvim to manage floating window
-
-      -- Create the floating window
-      local function open_lazygit()
-        local width = math.floor(vim.o.columns * 0.8)
-        local height = math.floor(vim.o.lines * 0.8)
-        local opts = {
-          relative = "editor",
-          width = width,
-          height = height,
-          col = math.floor((vim.o.columns - width) / 2),
-          row = math.floor((vim.o.lines - height) / 2),
-          border = "rounded",
-          style = "minimal",
-        }
-
-        local buf = vim.api.nvim_create_buf(false, true)
-        local win = vim.api.nvim_open_win(buf, true, opts)
-        vim.wo[win].winblend = 0
-        vim.wo[win].wrap = false
-        vim.wo[win].scrolloff = 0
-        vim.wo[win].sidescrolloff = 8 -- Allow some margin for scrolling
-
-        vim.fn.termopen("lazygit", {
-          on_exit = function(_, _, _)
-            vim.api.nvim_win_close(win, true)
-          end,
-        })
-
-        -- Switch to insert mode with an autocommand
-        -- vim.cmd "startinsert"
-      end
-
-      vim.api.nvim_create_user_command("LazyGit", open_lazygit, {})
+      require "configs.customs.lazygit"
     end,
-    -- setting the keybinding for LazyGit with 'keys' is recommended in
-    -- order to load the plugin when the command is run for the first time
-    keys = {
-      { "<leader>lg", "<cmd>LazyGit<cr>", desc = "LazyGit" },
-    },
   },
 }
