@@ -148,4 +148,11 @@ return {
       require "configs.customs.lazygit"
     end,
   },
+
+  {
+    -- NOTE: Smoothie animations
+    "psliwka/vim-smoothie",
+    lazy = false,
+    event = "VeryLazy",
+  },
 }
