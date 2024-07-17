@@ -86,7 +86,7 @@ return {
   {
     -- NOTE : Neorg Note-taking Plugin
     "nvim-neorg/neorg",
-    lazy = false,
+    ft = "norg",
     version = "*",
     config = function()
       require "configs.customs.neorg"
