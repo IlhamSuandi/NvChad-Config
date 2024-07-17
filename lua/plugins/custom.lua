@@ -128,10 +128,4 @@ return {
       require("colorizer").setup()
     end,
   },
-
-  {
-    "ibhagwan/fzf-lua",
-    lazy = false,
-    requires = { "nvim-tree/nvim-web-devicons" },
-  },
 }

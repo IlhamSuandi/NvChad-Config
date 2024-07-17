@@ -1,6 +1,6 @@
 return {
-  -- NOTE : override nvim cmp with custom config
   {
+    -- NOTE : override nvim cmp with custom config
     "hrsh7th/nvim-cmp",
     event = "InsertEnter",
     dependencies = {
@@ -48,7 +48,19 @@ return {
   },
 
   {
-    -- NOTE : override treesitter 
+    -- NOTE : nvimtree file managing , picker etc
+    "nvim-tree/nvim-tree.lua",
+    cmd = { "NvimTreeToggle", "NvimTreeFocus" },
+    opts = function()
+      return require "configs.nvim_tree"
+    end,
+    config = function(_, opts)
+      require("nvim-tree").setup(opts)
+    end,
+  },
+
+  {
+    -- NOTE : override treesitter
     "nvim-treesitter/nvim-treesitter",
     opts = {
       ensure_installed = { "html", "css", "bash" },
@@ -60,7 +72,6 @@ return {
     "nvim-telescope/telescope.nvim",
     opts = function()
       local conf = require "nvchad.configs.telescope"
-
       conf.defaults.mappings.i = {
         ["<C-j>"] = require("telescope.actions").move_selection_next,
         ["<C-k>"] = require("telescope.actions").move_selection_previous,
@@ -80,129 +91,37 @@ return {
   },
 
   {
-    -- NOTE : Tmux-Navigator
-    "christoomey/vim-tmux-navigator",
-    event = "VeryLazy",
-  },
-
-  {
-    -- NOTE : VIM-Surround
-    "tpope/vim-surround",
-    event = "VeryLazy",
-  },
-
-  {
-    -- NOTE : VIM-Easy-Motion
-    "easymotion/vim-easymotion",
-    event = "VeryLazy",
+    -- NOTE : override indent-blankline
+    "lukas-reineke/indent-blankline.nvim",
+    event = "User FilePost",
     config = function()
-      require "configs.easy_motion"
-    end,
-  },
+      local highlight = {
+        "RainbowRed",
+        "RainbowYellow",
+        "RainbowBlue",
+        "RainbowOrange",
+        "RainbowGreen",
+        "RainbowViolet",
+        "RainbowCyan",
+      }
 
-  {
-    -- NOTE : Mark Plugin
-    "chentoast/marks.nvim",
-    event = "VeryLazy",
-    config = function()
-      require "configs.marks"
-    end,
-  },
+      local hooks = require "ibl.hooks"
 
-  {
-    -- NOTE : Todo-Comments
-    "folke/todo-comments.nvim",
-    event = "VeryLazy",
-    dependencies = { "nvim-lua/plenary.nvim" },
-    opts = require "configs.todo_comments",
-  },
+      hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
+        vim.api.nvim_set_hl(0, "RainbowRed", { fg = "#B5BFE2" })
+        vim.api.nvim_set_hl(0, "RainbowYellow", { fg = "#E5C07B" })
+        vim.api.nvim_set_hl(0, "RainbowBlue", { fg = "#61AFEF" })
+        vim.api.nvim_set_hl(0, "RainbowOrange", { fg = "#D19A66" })
+        vim.api.nvim_set_hl(0, "RainbowGreen", { fg = "#98C379" })
+        vim.api.nvim_set_hl(0, "RainbowViolet", { fg = "#C678DD" })
+        vim.api.nvim_set_hl(0, "RainbowCyan", { fg = "#56B6C2" })
+      end)
 
-  {
-    -- NOTE : Harpoon
-    "ThePrimeagen/harpoon",
-    config = function()
-      require "configs.harpoon"
-    end,
-  },
+      vim.g.rainbow_delimiters = { highlight = highlight }
 
-  {
-    -- NOTE : Visual-Multi
-    "mg979/vim-visual-multi",
-    lazy = false,
-  },
+      require("ibl").setup { scope = { char = "│", highlight = highlight } }
 
-  {
-    -- NOTE : Auto Session Persistence
-    "folke/persistence.nvim",
-    event = "BufReadPre",
-    config = function()
-      require "configs.custom_persistence"
-    end,
-  },
-
-  {
-    -- NOTE : Vim-Sneak
-    "justinmk/vim-sneak",
-    lazy = false,
-  },
-
-  {
-    -- NOTE : Super_Maven Auto Suggest
-    "supermaven-inc/supermaven-nvim",
-    event = "VeryLazy",
-    config = function()
-      require "configs.supermaven"
-    end,
-  },
-
-  {
-    -- NOTE : Noice Notification
-    "folke/noice.nvim",
-    event = "VeryLazy",
-    dependencies = {
-      "MunifTanjim/nui.nvim",
-      "rcarriga/nvim-notify",
-    },
-    config = function()
-      require "configs.noice"
-    end,
-  },
-
-  {
-    -- NOTE : Neorg Note-taking Plugin
-    "nvim-neorg/neorg",
-    lazy = false,
-    version = "*",
-    config = function()
-      require "configs.neorg"
-    end,
-  },
-
-  {
-    -- NOTE : Flutter-Tools Plugin for debugging flutter apps
-    "akinsho/flutter-tools.nvim",
-    lazy = false,
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "stevearc/dressing.nvim", -- optional for vim.ui.select
-    },
-    config = function()
-      require "configs.flutter_tools"
-    end,
-  },
-
-  {
-    -- NOTE : debugging tools
-    "mfussenegger/nvim-dap",
-    dependencies = {
-      "rcarriga/nvim-dap-ui",
-      -- "theHamsta/nvim-dap-virtual-text",
-      -- "jbyuki/one-small-step-for-vimkind",
-      -- "nvim-telescope/telescope-dap.nvim",
-    },
-    event = "VeryLazy",
-    config = function()
-      require "configs.nvim_dap"
+      hooks.register(hooks.type.SCOPE_HIGHLIGHT, hooks.builtin.scope_highlight_from_extmark)
     end,
   },
 }
