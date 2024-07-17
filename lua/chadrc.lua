@@ -7,6 +7,11 @@ local M = {}
 M.ui = {
   theme = "catppuccin",
 
+  hl_add = {
+    StatusLineUsername = { fg = "#81C8BE" },
+    StatusLineNoiceRecording = { fg = "#E78284" },
+  },
+
   hl_override = {
     CursorLine = { bg = "#424757" },
     Visual = { bg = "grey_fg2" },
@@ -20,8 +25,35 @@ M.ui = {
   statusline = {
     theme = "default",
     separator_style = "arrow",
-    order = nil,
-    modules = nil,
+    order = {
+      "mode",
+      "file",
+      "git",
+      "noice_recording",
+      "lsp_msg",
+      "%=",
+      "username",
+      "diagnostics",
+      "lsp",
+      "cwd",
+      "cursor",
+    },
+    modules = {
+      username = function()
+        local username = os.getenv "USER"
+
+        return "%#StatusLineUsername# " .. username .. " "
+      end,
+      noice_recording = function()
+        local noice = require "noice"
+        local recording_status = noice.api.statusline.mode.get()
+        if noice.api.statusline.mode.has() and recording_status:find "recording" then
+          return "%#StatusLineNoiceRecording# " .. recording_status .. " "
+        else
+          return ""
+        end
+      end,
+    },
   },
 
   nvdash = {
