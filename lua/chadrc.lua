@@ -8,6 +8,7 @@ M.ui = {
   theme = "catppuccin",
 
   hl_override = {
+    CursorLine = { bg = "#424757" },
     Visual = { bg = "grey_fg2" },
     LineNr = { fg = "#7b797b" },
     Comment = { fg = "#a1a1a1", italic = true },
@@ -18,7 +19,7 @@ M.ui = {
 
   statusline = {
     theme = "default",
-    separator_style = "round",
+    separator_style = "arrow",
     order = nil,
     modules = nil,
   },

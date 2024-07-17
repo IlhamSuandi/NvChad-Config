@@ -32,20 +32,42 @@ return {
       },
 
       -- cmp sources plugins
-      {
-        "saadparwaiz1/cmp_luasnip",
-        "hrsh7th/cmp-nvim-lua",
-        "hrsh7th/cmp-nvim-lsp",
-        "hrsh7th/cmp-buffer",
-        "hrsh7th/cmp-path",
-        "hrsh7th/cmp-cmdline",
-      },
+      "saadparwaiz1/cmp_luasnip",
+      "hrsh7th/cmp-nvim-lua",
+      "hrsh7th/cmp-nvim-lsp",
+      "hrsh7th/cmp-buffer",
+      "hrsh7th/cmp-path",
+      "hrsh7th/cmp-cmdline",
     },
     opts = function()
       return require "configs.cmp"
     end,
     config = function(_, opts)
       require("cmp").setup(opts)
+    end,
+  },
+
+  {
+    -- NOTE : override treesitter 
+    "nvim-treesitter/nvim-treesitter",
+    opts = {
+      ensure_installed = { "html", "css", "bash" },
+    },
+  },
+
+  {
+    -- NOTE : telescope
+    "nvim-telescope/telescope.nvim",
+    opts = function()
+      local conf = require "nvchad.configs.telescope"
+
+      conf.defaults.mappings.i = {
+        ["<C-j>"] = require("telescope.actions").move_selection_next,
+        ["<C-k>"] = require("telescope.actions").move_selection_previous,
+        ["<Esc>"] = require("telescope.actions").close,
+      }
+
+      return conf
     end,
   },
 
@@ -68,6 +90,7 @@ return {
     "tpope/vim-surround",
     event = "VeryLazy",
   },
+
   {
     -- NOTE : VIM-Easy-Motion
     "easymotion/vim-easymotion",
@@ -109,8 +132,8 @@ return {
   },
 
   {
-    "folke/persistence.nvim",
     -- NOTE : Auto Session Persistence
+    "folke/persistence.nvim",
     event = "BufReadPre",
     config = function()
       require "configs.custom_persistence"
@@ -180,14 +203,6 @@ return {
     event = "VeryLazy",
     config = function()
       require "configs.nvim_dap"
-    end,
-  },
-
-  {
-    -- NOTE : colorizer
-    "norcalli/nvim-colorizer.lua",
-    config = function()
-      require("colorizer").setup()
     end,
   },
 }

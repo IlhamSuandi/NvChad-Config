@@ -131,12 +131,19 @@ map("n", "die", "ggVGd", { desc = "everything delete everything" })
 map("v", "<C-_>", "gc", { noremap = true, silent = true })
 map("n", "<C-_>", "gcc", { noremap = true, silent = true })
 
+-- tabufline
 map("n", "<A-l>", function()
   require("nvchad.tabufline").next()
 end, { desc = "buffer goto next" })
 map("n", "<A-h>", function()
   require("nvchad.tabufline").prev()
 end, { desc = "buffer goto prev" })
+map("n", "<A-H>", function()
+  require("nvchad.tabufline").move_buf(-1)
+end, { desc = "buffer move to prev" })
+map("n", "<A-L>", function()
+  require("nvchad.tabufline").move_buf(1)
+end, { desc = "buffer move to next" })
 
 -- NOTE : move line up / down
 map("n", "<a-j>", ":m+<cr>", { noremap = true })
